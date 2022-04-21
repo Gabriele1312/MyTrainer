@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_con_logo"
+    android:background="@drawable/bg_senza_niente"
     tools:context=".LoginActivity">
 
     <TextView
         android:id="@+id/tv_mytrainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/ubuntu_regular"
         android:text="MY TRAINER"
         android:textColor="@color/yellowapp"
@@ -25,7 +25,7 @@
         android:id="@+id/tv_accedi"
         android:layout_width="225dp"
         android:layout_height="74dp"
-        android:layout_marginTop="184dp"
+        android:layout_marginTop="14dp"
         android:fontFamily="@font/ubuntu_regular"
         android:text="LOGIN"
         android:textColor="@color/white"
@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.575"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/ed_mail"
@@ -43,17 +43,15 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="412dp"
         android:background="@drawable/edit_text_style"
         android:drawableLeft="@drawable/ic_username"
-        android:drawableTint="@color/yellowapp"
         android:drawablePadding="8dp"
+        android:drawableTint="@color/yellowapp"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:padding="8dp"
         android:text="Inserisci e-mail"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,8 +66,8 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/edit_text_style"
         android:drawableLeft="@drawable/ic_password"
-        android:drawableTint="@color/yellowapp"
         android:drawablePadding="8dp"
+        android:drawableTint="@color/yellowapp"
         android:ems="10"
         android:inputType="textPassword"
         android:padding="8dp"
@@ -111,5 +109,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="123dp"
+        android:layout_height="123dp"
+        android:layout_marginTop="9dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mytrainer"
+        app:srcCompat="@drawable/iv_uomo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
