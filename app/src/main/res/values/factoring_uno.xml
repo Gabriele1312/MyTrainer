@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- EDIT-TEXT -->
+    <style name="Style_editText" parent="@android:style/Widget.EditText">
+        <!-- View -->
+        <item name="android:fontFamily"> @font/ubuntu_regular </item>
+        <item name="android:padding">8dp</item>
+        <!-- Drawable -->
+        <item name="android:background"> @drawable/edit_text_style</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="drawableTint">@color/yellowapp</item>
+    </style>
+
+    <!-- TEXT-VIEW -->
+    <style name="Style_textView" parent="@android:style/Widget.TextView">
+        <item name="android:fontFamily"> @font/ubuntu_regular </item>
+    </style>
+
+</resources>
