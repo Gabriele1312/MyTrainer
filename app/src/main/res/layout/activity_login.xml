@@ -36,6 +36,7 @@
 
     <EditText
         android:id="@+id/ed_mail"
+        style="@style/Style_editText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -50,11 +51,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_accedi"
-        style="@style/Style_editText"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_accedi" />
 
     <EditText
         android:id="@+id/ed_password"
+        style="@style/Style_editText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -69,8 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_mail"
-        style="@style/Style_editText"/>
+        app:layout_constraintTop_toBottomOf="@+id/ed_mail" />
 
     <Button
         android:id="@+id/btn_go"
