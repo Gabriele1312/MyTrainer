@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTrainer">
         <activity
+            android:name=".Trainer2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".AthleteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TrainerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Trainer"
+            android:exported="false" />
+        <activity
             android:name=".DashboardActivity"
             android:exported="false" />
         <activity
