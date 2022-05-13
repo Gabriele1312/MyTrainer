@@ -15,7 +15,9 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.oAuthCredential
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
 
@@ -23,66 +25,60 @@ import java.util.*
 class LoginActivity : AppCompatActivity(){
 
     lateinit var callbackManager: CallbackManager
-    private lateinit var mFirebaseAuth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
     private val TAG = "FacebookAuthentication"
     lateinit var facebookBtn: Button
+
+
+    //quando l'activity si inizializza, controlla se l'utente è già loggato
+    override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+
+        //if(currentUser != null){
+            //updateUI(currentUser)
+        //}
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        //inizializza database firebase e facebook sdk
-        mFirebaseAuth = FirebaseAuth.getInstance()
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
-
-        facebookBtn = findViewById(R.id.btn_facebook)
-
-        //inizializza fb login button
+        //inizializza database firebase
+        auth= Firebase.auth
         callbackManager = CallbackManager.Factory.create();
 
-        facebookBtn.setOnClickListener(){
+        auth = Firebase.auth
+        callbackManager = CallbackManager.Factory.create();
 
-                btn_facebook.setEnabled(false)
+        login_button.setPermissions("email", "public_profile")
+        login_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(loginResult: LoginResult) {
+                Log.d(TAG, "facebook:onSuccess:$loginResult")
+                handleFacebookAccessToken(loginResult.accessToken)
+            }
 
-                LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email", "public_profile"))
-                LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
-                    override fun onSuccess(loginResult: LoginResult) {
-                        Log.d(TAG, "facebook:onSuccess:$loginResult")
-                        handleFacebookAccessToken(loginResult.accessToken)
-                    }
+            override fun onCancel() {
+                Log.d(TAG, "facebook:onCancel")
+                // ...
+            }
 
-                    override fun onCancel() {
-                        Log.d(TAG, "facebook:onCancel")
-                        // ...
-                    }
-
-                    override fun onError(error: FacebookException) {
-                        Log.d(TAG, "facebook:onError", error)
-                        // ...
-                    }
-                })
-        }
-    }
-
-    //quando l'activity si inizializza, controlla se l'utente è già loggato
-    override fun onStart() {
-        super.onStart()
-        val currentUser = mFirebaseAuth.currentUser
-
-        if(currentUser != null){
-            updateUI(currentUser)
-        }
-
+            override fun onError(error: FacebookException) {
+                Log.d(TAG, "facebook:onError", error)
+            // ...
+            }
+        })
+            // ...
     }
 
     //passa il risultato all'SDK di facebook
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+    //override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        //super.onActivityResult(requestCode, resultCode, data)
 
         // Pass the activity result back to the Facebook SDK
-        callbackManager.onActivityResult(requestCode, resultCode, data)
-    }
+        //callbackManager.onActivityResult(requestCode, resultCode, data)
+   // }
 
     //se l'utente si è loggato correttamente , riceve un token di accesso, lo scambia per le credenziali di firebase
     //si autentica in firebase con le credenziali.
@@ -90,15 +86,14 @@ class LoginActivity : AppCompatActivity(){
         Log.d(TAG, "HandleFacebookToken $accessToken")
 
         val credential: AuthCredential = FacebookAuthProvider.getCredential(accessToken.token)
-
-        mFirebaseAuth.signInWithCredential(credential)
+        auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // login con successo, aggiorna UI con info utente
                     Log.d(TAG, "signInWithCredential:success")
-                    val user = mFirebaseAuth.currentUser
+                    val user = auth.currentUser
 
-                    btn_facebook.setEnabled(true)
+                    //btn_facebook.setEnabled(true) //visibilità bottone
                     updateUI(user)
 
                 } else {
@@ -107,15 +102,15 @@ class LoginActivity : AppCompatActivity(){
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
 
-                    btn_facebook.setEnabled(true)
+                    //btn_facebook.setEnabled(true)
                     updateUI(null)
                 }
             }
     }
 
-    private fun updateUI(user: FirebaseUser?) {
+    private fun updateUI(currentUser: FirebaseUser?) {
+        Log.d(TAG, "Dentro")
         Toast.makeText(this, " Login effettuato ", Toast.LENGTH_SHORT).show()
-
         //apre Dashboard
         val dashboard = Intent(this, DashboardActivity::class.java)
         startActivity(dashboard)
