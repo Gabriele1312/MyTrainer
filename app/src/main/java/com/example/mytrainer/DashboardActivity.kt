@@ -12,17 +12,17 @@ import com.google.firebase.auth.FirebaseUser
 
 class DashboardActivity : AppCompatActivity() {
 
-    private lateinit var mAuth: FirebaseAuth
+    private var mAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
-        var btnLogout = findViewById<Button>(R.id.login_button)
+        var btnLogout = findViewById<Button>(R.id.btn_logout)
 
-        btnLogout.setOnClickListener(){
+        btnLogout?.setOnClickListener{
 
-            mAuth.signOut()
+            mAuth?.signOut()
             LoginManager.getInstance().logOut()
 
             updateUI()
@@ -32,9 +32,9 @@ class DashboardActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val currentUser = mAuth.currentUser
+        val currentUser = mAuth?.currentUser
 
-        if(currentUser == null){
+        if(currentUser != null){
             updateUI()
         }
     }
@@ -43,8 +43,8 @@ class DashboardActivity : AppCompatActivity() {
         Toast.makeText(this, " LogOut ", Toast.LENGTH_SHORT).show()
 
         //apre Dashboard
-        val dashboard = Intent(this, LoginActivity::class.java)
-        startActivity(dashboard)
+        val Login = Intent(this, LoginActivity::class.java)
+        startActivity(Login)
         finish()
     }
 }
