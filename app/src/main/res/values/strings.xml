@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">MyTrainer</string>
     <string name="facebook_app_id">1181939339238502</string>
-    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="fb_login_protocol_scheme">fb1181939339238502</string>
     <string name="facebook_client_token">5a94fea768d9460603a67b7c4a9ed687</string>
 </resources>
