@@ -31,15 +31,15 @@ class LoginActivity : AppCompatActivity(){
 
 
     //quando l'activity si inizializza, controlla se l'utente è già loggato
-    override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
+    //override fun onStart() {
+        //super.onStart()
+        //val currentUser = auth.currentUser
 
         //if(currentUser != null){
             //updateUI(currentUser)
         //}
 
-    }
+    //}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity(){
             // ...
             }
         })
-            // ...
+
     }
 
     //passa il risultato all'SDK di facebook
@@ -111,6 +111,7 @@ class LoginActivity : AppCompatActivity(){
     private fun updateUI(currentUser: FirebaseUser?) {
         Log.d(TAG, "Dentro")
         Toast.makeText(this, " Login effettuato ", Toast.LENGTH_SHORT).show()
+
         //apre Dashboard
         val dashboard = Intent(this, DashboardActivity::class.java)
         startActivity(dashboard)

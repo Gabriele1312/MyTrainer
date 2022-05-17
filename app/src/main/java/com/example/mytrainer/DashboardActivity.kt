@@ -27,6 +27,17 @@ class DashboardActivity : AppCompatActivity() {
 
             updateUI()
         }
+
+
+        var btnEsercizi = findViewById<Button>(R.id.btn_esercizi)
+
+        btnEsercizi.setOnClickListener(){
+
+            //apre Trainer2Activity
+            val es = Intent(this@DashboardActivity, Trainer2Activity::class.java)
+            startActivity(es)
+        }
+
     }
 
 
@@ -45,6 +56,5 @@ class DashboardActivity : AppCompatActivity() {
         //apre Dashboard
         val Login = Intent(this, LoginActivity::class.java)
         startActivity(Login)
-        finish()
     }
 }
