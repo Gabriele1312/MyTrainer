@@ -3,8 +3,10 @@ package com.example.mytrainer
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
+import com.facebook.login.Login
 import com.facebook.login.LoginManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -12,7 +14,8 @@ import com.google.firebase.auth.FirebaseUser
 
 class DashboardActivity : AppCompatActivity() {
 
-    private var mAuth: FirebaseAuth? = null
+    var mAuth: FirebaseAuth? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,20 +44,21 @@ class DashboardActivity : AppCompatActivity() {
     }
 
 
-    override fun onStart() {
-        super.onStart()
-        val currentUser = mAuth?.currentUser
-
-        if(currentUser != null){
-            updateUI()
-        }
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        val currentUser = mAuth?.currentUser
+//
+//        if(currentUser != null){
+//            updateUI()
+//        }
+//    }
 
     private fun updateUI() {
         Toast.makeText(this, " LogOut ", Toast.LENGTH_SHORT).show()
 
-        //apre Dashboard
+        //apre login
         val Login = Intent(this, LoginActivity::class.java)
         startActivity(Login)
     }
+
 }

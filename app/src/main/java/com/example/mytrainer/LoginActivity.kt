@@ -20,37 +20,46 @@ import com.google.firebase.auth.ktx.oAuthCredential
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
-
+import com.example.mytrainer.DashboardActivity as DashboardActivity1
 
 class LoginActivity : AppCompatActivity(){
 
     lateinit var callbackManager: CallbackManager
-    private lateinit var auth: FirebaseAuth
+    lateinit var mAuth: FirebaseAuth
     private val TAG = "FacebookAuthentication"
     lateinit var facebookBtn: Button
 
 
     //quando l'activity si inizializza, controlla se l'utente è già loggato
-    //override fun onStart() {
-        //super.onStart()
-        //val currentUser = auth.currentUser
+    override fun onStart() {
+        super.onStart()
+        val currentUser = mAuth.currentUser
+        var accessToken: AccessToken? = AccessToken.getCurrentAccessToken()
 
-        //if(currentUser != null){
-            //updateUI(currentUser)
-        //}
 
-    //}
+        if(accessToken != null && !accessToken.isExpired){
+            updateUIT()
+        }
+    }
+
+    private fun updateUIT() {
+        Toast.makeText(this, " Accesso già effettuato ", Toast.LENGTH_SHORT).show()
+
+        //apre Dashboard
+        val dashboard = Intent(this, DashboardActivity1::class.java)
+        startActivity(dashboard)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         //inizializza database firebase
-        auth= Firebase.auth
+        mAuth= Firebase.auth
         callbackManager = CallbackManager.Factory.create();
 
-        auth = Firebase.auth
-        callbackManager = CallbackManager.Factory.create();
+//        mAuth = Firebase.auth
+//        callbackManager = CallbackManager.Factory.create();
 
         login_button.setPermissions("email", "public_profile")
         login_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
@@ -86,12 +95,12 @@ class LoginActivity : AppCompatActivity(){
         Log.d(TAG, "HandleFacebookToken $accessToken")
 
         val credential: AuthCredential = FacebookAuthProvider.getCredential(accessToken.token)
-        auth.signInWithCredential(credential)
+        mAuth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // login con successo, aggiorna UI con info utente
                     Log.d(TAG, "signInWithCredential:success")
-                    val user = auth.currentUser
+                    val user = mAuth?.currentUser
 
                     //btn_facebook.setEnabled(true) //visibilità bottone
                     updateUI(user)
@@ -113,7 +122,10 @@ class LoginActivity : AppCompatActivity(){
         Toast.makeText(this, " Login effettuato ", Toast.LENGTH_SHORT).show()
 
         //apre Dashboard
-        val dashboard = Intent(this, DashboardActivity::class.java)
-        startActivity(dashboard)
+        val dashboard = Intent(this, DashboardActivity1::class.java).also {
+            startActivity(it)
+
+        }
     }
 }
+
