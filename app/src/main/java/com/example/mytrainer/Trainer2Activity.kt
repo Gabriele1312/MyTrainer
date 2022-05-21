@@ -48,8 +48,6 @@ class Trainer2Activity : AppCompatActivity() {
 
 
 
-
-
     //listener per la lettura dei dati
     private fun getEserciziListener(): ChildEventListener {
         val listener = object: ChildEventListener{

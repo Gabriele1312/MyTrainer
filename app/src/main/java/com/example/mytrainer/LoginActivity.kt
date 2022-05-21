@@ -1,22 +1,19 @@
 package com.example.mytrainer
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.facebook.*
-import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.auth.ktx.oAuthCredential
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
@@ -58,8 +55,7 @@ class LoginActivity : AppCompatActivity(){
         mAuth= Firebase.auth
         callbackManager = CallbackManager.Factory.create();
 
-//        mAuth = Firebase.auth
-//        callbackManager = CallbackManager.Factory.create();
+
 
         login_button.setPermissions("email", "public_profile")
         login_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
@@ -80,8 +76,6 @@ class LoginActivity : AppCompatActivity(){
         })
 
     }
-
-    //passa il risultato all'SDK di facebook
     //override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         //super.onActivityResult(requestCode, resultCode, data)
 
