@@ -37,7 +37,7 @@ class DashboardActivity : AppCompatActivity() {
         btnEsercizi.setOnClickListener(){
 
             //apre Trainer2Activity
-            val es = Intent(this@DashboardActivity, Trainer2Activity::class.java)
+            val es = Intent(this@DashboardActivity, AthleteActivity::class.java)
             startActivity(es)
         }
 

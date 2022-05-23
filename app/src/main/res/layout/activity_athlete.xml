@@ -46,7 +46,7 @@
 
                     <LinearLayout
                         android:onClick="ImageButtonClicked"
-                        android:id="@+id/boat_pose"
+                        android:id="@+id/chest_press"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10.0dp"
@@ -140,7 +140,7 @@
 
                     <LinearLayout
                         android:onClick="ImageButtonClicked"
-                        android:id="@+id/boat_pose1"
+                        android:id="@+id/squat_jump"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10.0dp"
@@ -157,7 +157,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ubuntu_regular"
-                                android:text="Chest Press"
+                                android:text="Squat Jump"
                                 android:textAllCaps="true"
                                 android:textColor="#ff000000"
                                 android:textSize="15.0dp"
@@ -233,7 +233,7 @@
 
                     <LinearLayout
                         android:onClick="ImageButtonClicked"
-                        android:id="@+id/boat_pose2"
+                        android:id="@+id/leg_extensions"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10.0dp"
