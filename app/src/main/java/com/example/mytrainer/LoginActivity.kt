@@ -13,11 +13,14 @@ import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
 import com.example.mytrainer.DashboardActivity as DashboardActivity1
+import kotlin.toString as toString1
 
 class LoginActivity : AppCompatActivity(){
 
@@ -31,11 +34,38 @@ class LoginActivity : AppCompatActivity(){
     override fun onStart() {
         super.onStart()
         val currentUser = mAuth.currentUser
+        val UID = mAuth.uid.toString1()
         var accessToken: AccessToken? = AccessToken.getCurrentAccessToken()
 
 
         if(accessToken != null && !accessToken.isExpired){
             updateUIT()
+        }
+
+        val utenti = hashMapOf(
+            "UIDatleti" to (mAuth.uid.toString1())
+        )
+        val db = Firebase.firestore
+        db.collection("Utenti").document("Atleti")
+            .set(utenti)
+            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+            .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+        val usrAtleti = db.collection("Utenti")
+
+        val query = usrAtleti.whereEqualTo("UIDatleti", "UID")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents: ", exception)
+            }
+        if (query.toString() == UID){
+            Log.d(TAG, "**************** GGGGGGGG")
+        }else{
+            Log.d(TAG, "***************** NOOOOOOOOOOOOOOOO ${query}")
         }
     }
 
@@ -54,8 +84,6 @@ class LoginActivity : AppCompatActivity(){
         //inizializza database firebase
         mAuth= Firebase.auth
         callbackManager = CallbackManager.Factory.create();
-
-
 
         login_button.setPermissions("email", "public_profile")
         login_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
@@ -76,6 +104,8 @@ class LoginActivity : AppCompatActivity(){
         })
 
     }
+
+
     //override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         //super.onActivityResult(requestCode, resultCode, data)
 
