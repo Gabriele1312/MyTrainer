@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTrainer">
         <activity
-            android:name=".FocusEsercizio"
+            android:name=".ListaAtleti"
+            android:exported="false" />
+        <activity
+            android:name=".Timer"
             android:exported="false" />
         <activity
             android:name=".Trainer2Activity"

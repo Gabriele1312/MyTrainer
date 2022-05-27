@@ -7,7 +7,7 @@
     tools:context=".ListaAtleti">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rwEsercizi"
+        android:id="@+id/rw"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

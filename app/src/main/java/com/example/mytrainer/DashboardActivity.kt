@@ -3,13 +3,11 @@ package com.example.mytrainer
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 
 import com.facebook.login.LoginManager
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 
 class DashboardActivity : AppCompatActivity() {
@@ -32,13 +30,17 @@ class DashboardActivity : AppCompatActivity() {
         }
 
 
-        var btnEsercizi = findViewById<Button>(R.id.btn_esercizi)
+        var btnPersonal = findViewById<Button>(R.id.btn_pt)
 
-        btnEsercizi.setOnClickListener(){
+        btnPersonal.setOnClickListener(){
+            val personal = Intent(this@DashboardActivity, TrainerActivity::class.java)
+            startActivity(personal)
+        }
 
-            //apre Trainer2Activity
-            val es = Intent(this@DashboardActivity, AthleteActivity::class.java)
-            startActivity(es)
+        var btnAtleti = findViewById<Button>(R.id.btn_atleta)
+        btnAtleti.setOnClickListener(){
+            val atleti = Intent(this@DashboardActivity, AthleteActivity::class.java)
+            startActivity(atleti)
         }
 
     }
