@@ -43,6 +43,12 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(atleti)
         }
 
+        var btnTimer = findViewById<Button>(R.id.btn_timer)
+        btnTimer.setOnClickListener(){
+            val timer = Intent(this@DashboardActivity, Timer::class.java)
+            startActivity(timer)
+        }
+
     }
 
 

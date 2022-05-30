@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_senza_niente"
+    android:background="@drawable/bg_login"
     tools:context=".LoginActivity">
 
     <TextView
@@ -52,7 +52,7 @@
         android:id="@+id/tv_fight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="104dp"
+        android:layout_marginBottom="16dp"
         android:text="Fight For Your Healthy"
         android:textColor="@color/white"
         android:textSize="20sp"

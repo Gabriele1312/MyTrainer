@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="yellowapp">#fad246</color>
     <color name="bluapp">#000957</color>
+    <color name="blulight">#577bc1</color>
 </resources>

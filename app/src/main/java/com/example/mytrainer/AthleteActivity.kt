@@ -1,10 +1,12 @@
 package com.example.mytrainer
 
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +20,7 @@ class AthleteActivity : AppCompatActivity() {
     private lateinit var eserciziArrayList: ArrayList<Esercizi>
     private lateinit var myAdapter: MyAdapterEsercizi
     private lateinit var db: FirebaseFirestore
+    private lateinit var buttonTimer: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +35,17 @@ class AthleteActivity : AppCompatActivity() {
         recyclerView.adapter = myAdapter
 
         EventChangeListener()
+
+        //il bottone non è sul layout di questa pagina, quindi devo richiamarlo.
+        //setContentView(R.layout.lista_esercizi_item)
+        //buttonTimer = findViewById(R.id.btn_timer_go)
+        //buttonTimer.setOnClickListener(){
+
+        //val i = Intent(this, Timer::class.java)
+            //startActivity(i)
+        //}
     }
+
 
     private fun EventChangeListener() {
         db = FirebaseFirestore.getInstance()
@@ -53,5 +66,4 @@ class AthleteActivity : AppCompatActivity() {
                 myAdapter.notifyDataSetChanged()
             }
     }
-
 }
