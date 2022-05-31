@@ -1,5 +1,5 @@
 package com.example.mytrainer
 
 //il nome deve combaciare con il database di fireStore
-data class Atleti(var nome: String? = null) {
+data class Atleti(var nome: String? = null, var UIDatleti: String? = null) {
 }
