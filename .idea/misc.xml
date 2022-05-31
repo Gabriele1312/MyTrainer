@@ -14,9 +14,14 @@
         <entry key="app/src/main/res/drawable/ic_baseline_exit_to_app_24.xml" value="0.128" />
         <entry key="app/src/main/res/drawable/ic_baseline_pause_24.xml" value="0.128" />
         <entry key="app/src/main/res/drawable/ic_baseline_play_arrow_24.xml" value="0.128" />
+        <entry key="app/src/main/res/drawable/ic_baseline_timer_24.xml" value="0.147" />
+        <entry key="app/src/main/res/drawable/ic_exit_yellow.xml" value="0.147" />
         <entry key="app/src/main/res/drawable/ic_facebook.xml" value="0.144" />
+        <entry key="app/src/main/res/drawable/ic_personal_trainer.xml" value="0.129" />
+        <entry key="app/src/main/res/drawable/ic_utente.xml" value="0.147" />
         <entry key="app/src/main/res/drawable/sytle_timer.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_athlete.xml" value="0.23645680745442704" />
+        <entry key="app/src/main/res/layout/activity_card_view.xml" value="0.18283233642578126" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.23543154951454937" />
         <entry key="app/src/main/res/layout/activity_focus_esercizio.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_lista_atleti.xml" value="0.21784420289855072" />
@@ -38,5 +43,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.20146331787109378" />
+      </ProjectState>
+    </option>
   </component>
 </project>
