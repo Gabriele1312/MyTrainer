@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.facebook.*
@@ -17,7 +16,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
@@ -25,9 +23,8 @@ import java.util.*
 import com.example.mytrainer.DashboardActivity as DashboardActivity1
 import kotlin.toString as toString1
 
-class LoginActivity : AppCompatActivity(){
+class LoginActivityPT : AppCompatActivity(){
 
-    private lateinit var userArrayList: ArrayList<Atleti>
     lateinit var callbackManager: CallbackManager
     lateinit var mAuth: FirebaseAuth
     private val TAG = "FacebookAuthentication"
@@ -46,6 +43,14 @@ class LoginActivity : AppCompatActivity(){
             updateUIT()
         }
 
+//        val utenti = hashMapOf(
+//            "UIDatleti" to (mAuth.uid.toString1())
+//        )
+//        val db = Firebase.firestore
+//        db.collection("Utenti").document("Atleti")
+//            .set(utenti)
+//            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+//            .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
 //
 //        val usrAtleti = db.collection("Utenti")
 //
@@ -70,16 +75,15 @@ class LoginActivity : AppCompatActivity(){
 
     private fun updateUIT() {
         Toast.makeText(this, " Accesso già effettuato ", Toast.LENGTH_SHORT).show()
-//        Log.d(TAG, "****************** ${mAuth.currentUser?.displayName}")
 
         //apre Dashboard
-        val dashboard = Intent(this, AthleteActivity::class.java)
+        val dashboard = Intent(this, TrainerActivity::class.java)
         startActivity(dashboard)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_login_pt)
 
         //inizializza database firebase
         mAuth= Firebase.auth
@@ -99,7 +103,7 @@ class LoginActivity : AppCompatActivity(){
 
             override fun onError(error: FacebookException) {
                 Log.d(TAG, "facebook:onError", error)
-            // ...
+                // ...
             }
         })
 
@@ -107,11 +111,11 @@ class LoginActivity : AppCompatActivity(){
 
 
     //override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        //super.onActivityResult(requestCode, resultCode, data)
+    //super.onActivityResult(requestCode, resultCode, data)
 
-        // Pass the activity result back to the Facebook SDK
-        //callbackManager.onActivityResult(requestCode, resultCode, data)
-   // }
+    // Pass the activity result back to the Facebook SDK
+    //callbackManager.onActivityResult(requestCode, resultCode, data)
+    // }
 
     //se l'utente si è loggato correttamente , riceve un token di accesso, lo scambia per le credenziali di firebase
     //si autentica in firebase con le credenziali.
@@ -124,7 +128,7 @@ class LoginActivity : AppCompatActivity(){
                 if (task.isSuccessful) {
                     // login con successo, aggiorna UI con info utente
                     Log.d(TAG, "signInWithCredential:success")
-                    val user = mAuth.currentUser
+                    val user = mAuth?.currentUser
 
                     //btn_facebook.setEnabled(true) //visibilità bottone
                     updateUI(user)
@@ -142,51 +146,14 @@ class LoginActivity : AppCompatActivity(){
     }
 
     private fun updateUI(currentUser: FirebaseUser?) {
+        Log.d(TAG, "Dentro")
+        Toast.makeText(this, " Login effettuato ", Toast.LENGTH_SHORT).show()
 
-//        val nome = findViewById<TextView>(R.id.tvfirstName)
-//        Log.d(TAG, "********** ${nome.text}")
+        //apre Dashboard
+        val dashboard = Intent(this, TrainerActivity::class.java).also {
+            startActivity(it)
 
-//        val db = FirebaseFirestore.getInstance()
-//        val dataB = db.collection("Atleti")
-//                .whereEqualTo(mAuth.currentUser?.uid?.toString(), true)
-//                .get()
-//
-//        Log.d(TAG, "*********** $dataB")
-//
-//        if (mAuth.currentUser?.uid?.equals(dataB) == false) {
-//
-//            val utenti = hashMapOf(
-//                "nome" to mAuth.currentUser?.displayName,
-//                "UIDatleti" to (mAuth.uid.toString1())
-//            )
-//
-//            db.collection("Atleti")
-//                .add(utenti)
-//                .addOnSuccessListener {
-//                    Log.d(
-//                        TAG,
-//                        "DocumentSnapshot successfully written!"
-//                    )
-//                }
-//                .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
-
-            Log.d(TAG, "Dentro con registrazione utente")
-            Toast.makeText(this, " Login effettuato ", Toast.LENGTH_SHORT).show()
-
-            //apre AthleteActivity
-            Intent(this, AthleteActivity::class.java).also {
-                startActivity(it)
-            }
-//        }else{
-            Log.d(TAG, "Dentro senza registrazione utente")
-            Toast.makeText(this, " Login effettuato ", Toast.LENGTH_SHORT).show()
-            //apre AthleteActivity
-            Intent(this, AthleteActivity::class.java).also {
-                startActivity(it)
-
-//            }
         }
-
     }
 }
 
