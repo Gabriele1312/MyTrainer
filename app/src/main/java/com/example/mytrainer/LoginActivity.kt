@@ -47,33 +47,13 @@ class LoginActivity : AppCompatActivity(){
             updateUIT()
         }
 
-//
-//        val usrAtleti = db.collection("Utenti")
-//
-//
-//        val query = usrAtleti.orderBy("UIDatleti").equals("UID")
-//            .get()
-//            .addOnSuccessListener { documents ->
-//                for (document in documents) {
-//                    Log.d(TAG, "${document.id} => ${document.data}")
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.w(TAG, "Error getting documents: ", exception)
-//            }
-//        if (query.toString() == UID){
-//            Log.d(TAG, "**************** GGGGGGGG")
-//        }else{
-//            Log.d(TAG, "***************** NOOOOOOOOOOOOOOOO ${query}")
-//        }
-
     }
 
     private fun updateUIT() {
         Toast.makeText(this, " Accesso già effettuato ", Toast.LENGTH_SHORT).show()
 //        Log.d(TAG, "****************** ${mAuth.currentUser?.displayName}")
 
-        //apre Dashboard
+        //apre AthleteActivity
         val dashboard = Intent(this, AthleteActivity::class.java)
         startActivity(dashboard)
     }
@@ -144,71 +124,59 @@ class LoginActivity : AppCompatActivity(){
 
     private fun updateUI(currentUser: FirebaseUser?) {
 
-        var idUtente = mAuth.currentUser?.uid?.toString1()
+        userArrayList = arrayListOf()
+        var note: String = ""
 
-        Log.d(TAG, "******************* UID $idUtente")
+        var idUtente = mAuth.currentUser?.uid?.toString1()
 
         val db = FirebaseFirestore.getInstance()
         val dataB = db.collection("Atleti")
 
         val query = dataB
             .whereEqualTo("UIDatleti", mAuth.currentUser?.uid)
-        Log.d(TAG, "************QUERYYYY $query")
 
         query.get().addOnSuccessListener { querySnapshot ->
-            var note: String = ""
+
             for (dc : DocumentChange in querySnapshot.documentChanges){
-                    note = dc.document.toObject(Atleti::class.java).toString()
-                    Log.d(TAG, "*************PROVAAAAAA ${note}")
+                note = dc.document.getString("UIDatleti").toString1()
+                Log.d(TAG, "*************PROVAAAAAA ${note}")
                 }
-            Log.d(TAG, "updateUI: ******************** $note")
-            Log.d(TAG, "Dentro con registrazione utente")
-            Log.d(TAG, "**************SWADADA ${mAuth.currentUser?.uid?.equals(dataB) == false}")
+            if (mAuth.currentUser?.uid != note) {
 
-            Toast.makeText(this, " Login effettuato ", Toast.LENGTH_SHORT).show()
+                val utenti = hashMapOf(
+                    "nome" to mAuth.currentUser?.displayName,
+                    "UIDatleti" to (mAuth.uid.toString1())
+                )
 
-            //apre AthleteActivity
-            Intent(this, AthleteActivity::class.java).also {
-                startActivity(it)
+                db.collection("Atleti")
+                    .add(utenti)
+                    .addOnSuccessListener {
+                        Log.d(
+                            TAG,
+                            "DocumentSnapshot successfully written!"
+                        )
+                    }
+                    .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+
+                Log.d(TAG, "Dentro con registrazione utente")
+                Toast.makeText(this, " Login effettuato ", Toast.LENGTH_SHORT).show()
+
+                //apre AthleteActivity
+                Intent(this, AthleteActivity::class.java).also {
+                    startActivity(it)
+                }
+            }else{
+                Log.d(TAG, "Dentro senza registrazione utente")
+                Toast.makeText(this, " Login effettuato ", Toast.LENGTH_SHORT).show()
+                //apre AthleteActivity
+                Intent(this, AthleteActivity::class.java).also {
+                    startActivity(it)
+
+                }
             }
         }
+        Log.d(TAG, "updateUI: *****************${note}")
 
-
-        Log.d(TAG, "***********RISULTATO QUERY $dataB")
-
-        if (mAuth.currentUser?.uid?.equals(dataB) == true) {
-
-            val utenti = hashMapOf(
-                "nome" to mAuth.currentUser?.displayName,
-                "UIDatleti" to (mAuth.uid.toString1())
-            )
-
-            db.collection("Atleti")
-                .add(utenti)
-                .addOnSuccessListener {
-                    Log.d(
-                        TAG,
-                        "DocumentSnapshot successfully written!"
-                    )
-                }
-                .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
-
-            Log.d(TAG, "Dentro con registrazione utente")
-            Toast.makeText(this, " Login effettuato ", Toast.LENGTH_SHORT).show()
-
-            //apre AthleteActivity
-            Intent(this, AthleteActivity::class.java).also {
-                startActivity(it)
-            }
-        }else{
-            Log.d(TAG, "Dentro senza registrazione utente")
-            Toast.makeText(this, " Login effettuato ", Toast.LENGTH_SHORT).show()
-            //apre AthleteActivity
-            Intent(this, AthleteActivity::class.java).also {
-                startActivity(it)
-
-            }
-        }
 
     }
 }
