@@ -18,7 +18,6 @@ class MyAdapter(private val userList: ArrayList<Atleti>): RecyclerView.Adapter<M
 
         val user: Atleti = userList[position]
         holder.firstName.text = user.nome
-        holder.lastName.text = user.cognome
         //immagine
     }
 
@@ -30,7 +29,6 @@ class MyAdapter(private val userList: ArrayList<Atleti>): RecyclerView.Adapter<M
     public class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
         val firstName: TextView = itemView.findViewById(R.id.tvfirstName)
-        val lastName: TextView = itemView.findViewById(R.id.tvlastName)
         //immagine
     }
 }

@@ -31,25 +31,26 @@ class DashboardActivity : AppCompatActivity() {
 
        // var btnLogout = findViewById<Button>(R.id.btn_logout)
 
-        im_exit?.setOnClickListener{
+        im_exit.setOnClickListener{
 
             mAuth?.signOut()
             LoginManager.getInstance().logOut()
+            Toast.makeText(this, " LogOut ", Toast.LENGTH_SHORT).show()
 
-            updateUI()
+//            updateUI()
         }
 
 
 
 
         im_personalTrainer.setOnClickListener(){
-            val personal = Intent(this@DashboardActivity, TrainerActivity::class.java)
+            val personal = Intent(this@DashboardActivity, LoginActivityPT::class.java)
             startActivity(personal)
         }
 
 
         im_user.setOnClickListener(){
-            val atleti = Intent(this@DashboardActivity, AthleteActivity::class.java)
+            val atleti = Intent(this@DashboardActivity, LoginActivity::class.java)
             startActivity(atleti)
         }
 

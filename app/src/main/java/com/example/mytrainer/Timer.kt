@@ -62,6 +62,7 @@ class Timer : AppCompatActivity() {
         }
 
         exit.setOnClickListener(){
+
             val exit = Intent(this@Timer, AthleteActivity::class.java)
             startActivity(exit)
         }
