@@ -1,8 +1,11 @@
 package com.example.mytrainer
 
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -32,6 +35,14 @@ class MyAdapter(private val userList: ArrayList<Atleti>): RecyclerView.Adapter<M
         val UID: TextView = itemView.findViewById(R.id.tvUID)
         val nome: TextView = itemView.findViewById(R.id.tvnome)
         //immagine
+
+
+        val btnAggiungiScheda = itemView.findViewById<Button>(R.id.btn_aggiungiScheda).setOnClickListener(View.OnClickListener {
+            Log.i("PersonalTrainer" ,"APRO INSERISCI ESERCIZIO")
+            val context = it.context //context activity recycler view (getContext)
+            val aggiungi = Intent(context, AggiuntaEsercizi::class.java )
+            context.startActivity(aggiungi)
+        })
     }
 
 
