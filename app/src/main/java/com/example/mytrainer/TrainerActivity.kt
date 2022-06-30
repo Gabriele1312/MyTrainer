@@ -4,11 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import com.facebook.login.LoginManager
 import com.google.firebase.auth.FirebaseAuth
 
 class TrainerActivity : AppCompatActivity() {
+
+    lateinit var userList: ImageView
+    lateinit var logout: ImageView
 
     var mAuth: FirebaseAuth? = null
 
@@ -16,9 +20,9 @@ class TrainerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trainer)
 
-        var btnLogout = findViewById<Button>(R.id.btn_logout3)
+       logout = findViewById(R.id.im_logout)
 
-        btnLogout?.setOnClickListener{
+        logout?.setOnClickListener{
 
             mAuth?.signOut()
             LoginManager.getInstance().logOut()
@@ -26,8 +30,8 @@ class TrainerActivity : AppCompatActivity() {
             updateUI()
         }
 
-        val btnUtenti = findViewById<Button>(R.id.btn_listaAtleti)
-        btnUtenti.setOnClickListener(){
+        userList = findViewById(R.id.im_user_list)
+        userList.setOnClickListener(){
             val intent = Intent(this, ListaAtleti::class.java)
             startActivity(intent)
         }

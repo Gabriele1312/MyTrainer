@@ -17,7 +17,8 @@ class MyAdapter(private val userList: ArrayList<Atleti>): RecyclerView.Adapter<M
     override fun onBindViewHolder(holder: MyAdapter.MyViewHolder, position: Int) {
 
         val user: Atleti = userList[position]
-        holder.firstName.text = user.nome
+        holder.UID.text = user.UIDatleti
+        holder.nome.text = user.nome
         //immagine
     }
 
@@ -28,7 +29,10 @@ class MyAdapter(private val userList: ArrayList<Atleti>): RecyclerView.Adapter<M
 
     public class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
-        val firstName: TextView = itemView.findViewById(R.id.tvfirstName)
+        val UID: TextView = itemView.findViewById(R.id.tvUID)
+        val nome: TextView = itemView.findViewById(R.id.tvnome)
         //immagine
     }
+
+
 }

@@ -1,9 +1,13 @@
 package com.example.mytrainer
 
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
 class MyAdapterEsercizi(private val eserciziList: ArrayList<Esercizi>): RecyclerView.Adapter<MyAdapterEsercizi.MyViewHolder>() {
@@ -33,5 +37,14 @@ class MyAdapterEsercizi(private val eserciziList: ArrayList<Esercizi>): Recycler
         val serie: TextView = itemView.findViewById(R.id.tvserie)
         val ripetizioni: TextView = itemView.findViewById(R.id.tvripetizioni)
 
+        val btnTimer = itemView.findViewById<Button>(R.id.btn_timer_go).setOnClickListener(View.OnClickListener {
+            Log.i("Timer" ,"APRO TIMER")
+            val context = it.context //context activity recycler view (getContext)
+            val timer = Intent(context, Timer::class.java )
+            context.startActivity(timer)
+        })
+
     }
+
+
 }
