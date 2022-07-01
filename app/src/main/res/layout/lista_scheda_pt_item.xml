@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,37 +8,12 @@
     android:layout_margin="16dp">
 
     <LinearLayout
-        android:layout_width="361dp"
+        android:layout_width="358dp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="6dp"
         android:layout_marginStart="16dp"
         android:orientation="vertical">
 
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="UID"
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvUID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="0001200123321345"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -60,30 +34,75 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Gabriele"
+                android:text="ChestPress"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Serie"
+                android:textColor="@color/black"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvserie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="4"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ripetizioni"
+                android:textColor="@color/black"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvripetizioni"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="10"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_aggiungiScheda"
-            android:layout_width="200dp"
+            android:id="@+id/btn_eliminaEsercizio"
+            android:layout_width="353dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="3dp"
-            android:text="Aggiungi scheda"
+            android:layout_marginTop="8dp"
+            android:drawableLeft="@drawable/ic_baseline_rimuovi_esercizio"
+            android:text="elimina"
+            android:textColor="@color/bluapp"
+            android:textAlignment="textStart"
             android:textStyle="bold"></Button>
 
-        <Button
-            android:id="@+id/btn_vediScheda"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="3dp"
-            android:text="vedi scheda"
-            android:textStyle="bold"></Button>
     </LinearLayout>
-
 
 </androidx.cardview.widget.CardView>

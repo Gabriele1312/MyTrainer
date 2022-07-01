@@ -43,6 +43,14 @@ class MyAdapter(private val userList: ArrayList<Atleti>): RecyclerView.Adapter<M
             val aggiungi = Intent(context, AggiuntaEsercizi::class.java )
             context.startActivity(aggiungi)
         })
+
+
+        val btnVisualizzaScheda = itemView.findViewById<Button>(R.id.btn_vediScheda).setOnClickListener(View.OnClickListener {
+            Log.i("PersonalTrainer" ,"APRO VISUALIZZA ESERCIZI")
+            val context = it.context //context activity recycler view (getContext)
+            val vedi = Intent(context, VisualizzaEserciziPT::class.java )
+            context.startActivity(vedi)
+        })
     }
 
 

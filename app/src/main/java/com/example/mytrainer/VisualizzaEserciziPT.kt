@@ -1,67 +1,37 @@
 package com.example.mytrainer
 
-import android.app.Dialog
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Button
-import android.widget.Toast
-import android.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.facebook.login.LoginManager
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
-class AthleteActivity : AppCompatActivity() {
-
-    var mAuth: FirebaseAuth? = null
+class VisualizzaEserciziPT : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var eserciziArrayList: ArrayList<Esercizi>
-    private lateinit var myAdapter: MyAdapterEsercizi
+    private lateinit var myAdapter: MyAdapterSchedaPT
     private lateinit var db: FirebaseFirestore
-    private lateinit var buttonTimer: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_athlete)
+        setContentView(R.layout.activity_visualizza_esercizi_pt)
 
-        var btnLogout = findViewById<Button>(R.id.btn_logout2)
-
-        btnLogout?.setOnClickListener{
-
-            mAuth?.signOut()
-            LoginManager.getInstance().logOut()
-
-            updateUI()
-        }
-
-        recyclerView = findViewById(R.id.rwEsercizi)
+        recyclerView = findViewById(R.id.rwVisualizzaEsercizi)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
 
         eserciziArrayList = arrayListOf()
-        myAdapter = MyAdapterEsercizi(eserciziArrayList)
+        myAdapter = MyAdapterSchedaPT(eserciziArrayList)
         recyclerView.adapter = myAdapter
 
         EventChangeListener()
-
     }
 
-    private fun updateUI() {
-        Toast.makeText(this, " LogOut ", Toast.LENGTH_SHORT).show()
-
-        //apre login
-        val Login = Intent(this, DashboardActivity::class.java)
-        startActivity(Login)
-    }
-
-
+    //visualizza esercizi (da fare: per quell utente)
     private fun EventChangeListener() {
         db = FirebaseFirestore.getInstance()
         db.collection("Esercizi").orderBy("nome", Query.Direction.ASCENDING)
