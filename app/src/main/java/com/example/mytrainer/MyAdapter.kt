@@ -41,6 +41,8 @@ class MyAdapter(private val userList: ArrayList<Atleti>): RecyclerView.Adapter<M
             Log.i("PersonalTrainer" ,"APRO INSERISCI ESERCIZIO")
             val context = it.context //context activity recycler view (getContext)
             val aggiungi = Intent(context, AggiuntaEsercizi::class.java )
+            aggiungi.putExtra("uidAtleti", UID.text)
+            aggiungi.putExtra("nomeAtleta", nome.text)
             context.startActivity(aggiungi)
         })
 
@@ -49,6 +51,7 @@ class MyAdapter(private val userList: ArrayList<Atleti>): RecyclerView.Adapter<M
             Log.i("PersonalTrainer" ,"APRO VISUALIZZA ESERCIZI")
             val context = it.context //context activity recycler view (getContext)
             val vedi = Intent(context, VisualizzaEserciziPT::class.java )
+            vedi.putExtra("uidAtleti", UID.text)
             context.startActivity(vedi)
         })
     }

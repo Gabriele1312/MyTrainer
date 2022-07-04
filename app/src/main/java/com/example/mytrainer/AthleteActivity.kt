@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Contacts
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -13,29 +14,34 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.login.LoginManager
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.ktx.Firebase
 
 class AthleteActivity : AppCompatActivity() {
 
-    var mAuth: FirebaseAuth? = null
+    lateinit var mAuth: FirebaseAuth
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var eserciziArrayList: ArrayList<Esercizi>
     private lateinit var myAdapter: MyAdapterEsercizi
     private lateinit var db: FirebaseFirestore
     private lateinit var buttonTimer: Button
+//    val UID:String = intent.getStringExtra("uidAtleti").toString()
+//    val UID:String = mAuth?.currentUser?.uid.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_athlete)
 
         var btnLogout = findViewById<Button>(R.id.btn_logout2)
+        mAuth= Firebase.auth
 
         btnLogout?.setOnClickListener{
 
-            mAuth?.signOut()
+            mAuth.signOut()
             LoginManager.getInstance().logOut()
 
             updateUI()
@@ -63,8 +69,9 @@ class AthleteActivity : AppCompatActivity() {
 
 
     private fun EventChangeListener() {
+        Log.d("TAG", "*******************: ${mAuth.currentUser?.uid.toString()}")
         db = FirebaseFirestore.getInstance()
-        db.collection("Esercizi").orderBy("nome", Query.Direction.ASCENDING)
+        db.collection("Esercizi/Atleti/${mAuth.currentUser?.uid.toString()}").orderBy("nome", Query.Direction.ASCENDING)
             .addSnapshotListener { value, error ->
                 if (error != null) {
                     Log.e("FIRE STORE ERROR", error.message.toString())

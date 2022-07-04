@@ -148,8 +148,8 @@ class LoginActivity : AppCompatActivity(){
                     "UIDatleti" to (mAuth.uid.toString1())
                 )
 
-                db.collection("Atleti")
-                    .add(utenti)
+                db.collection("Atleti").document(mAuth.currentUser?.uid.toString1())
+                    .set(utenti)
                     .addOnSuccessListener {
                         Log.d(
                             TAG,
@@ -164,6 +164,7 @@ class LoginActivity : AppCompatActivity(){
                 //apre AthleteActivity
                 Intent(this, AthleteActivity::class.java).also {
                     startActivity(it)
+                    it.putExtra("uidAtleti", mAuth.currentUser?.uid.toString1())
                 }
             }else{
                 Log.d(TAG, "Dentro senza registrazione utente")
@@ -171,7 +172,7 @@ class LoginActivity : AppCompatActivity(){
                 //apre AthleteActivity
                 Intent(this, AthleteActivity::class.java).also {
                     startActivity(it)
-
+                    intent.putExtra("uidAtleti", mAuth.currentUser?.uid.toString1())
                 }
             }
         }

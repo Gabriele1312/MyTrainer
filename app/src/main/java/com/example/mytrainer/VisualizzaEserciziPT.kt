@@ -20,6 +20,7 @@ class VisualizzaEserciziPT : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_visualizza_esercizi_pt)
 
+
         recyclerView = findViewById(R.id.rwVisualizzaEsercizi)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
@@ -33,8 +34,9 @@ class VisualizzaEserciziPT : AppCompatActivity() {
 
     //visualizza esercizi (da fare: per quell utente)
     private fun EventChangeListener() {
+        val UID:String = intent.getStringExtra("uidAtleti").toString()
         db = FirebaseFirestore.getInstance()
-        db.collection("Esercizi").orderBy("nome", Query.Direction.ASCENDING)
+        db.collection("Esercizi/Atleti/${UID}").orderBy("nome", Query.Direction.ASCENDING)
             .addSnapshotListener { value, error ->
                 if (error != null) {
                     Log.e("FIRE STORE ERROR", error.message.toString())
