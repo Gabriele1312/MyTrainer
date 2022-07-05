@@ -11,6 +11,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -65,9 +67,15 @@ class MyAdapterSchedaPT(private val eserciziList: ArrayList<Esercizi>): Recycler
 
         })
 
-        private fun eliminaEsercizio(esercizio: Esercizi) {
-            val db = Firebase.firestore
-            db.collection("Esercizi").document()
+        //FUNZIONE ELIMINA ESERCIZIO DA IMPLEMENTARE
+        private fun eliminaEsercizio(view: View) {
+
+            lateinit var mAuth: FirebaseAuth
+
+            FirebaseFirestore.getInstance()
+                .collection("Esercizi")
+                .document("Atleti/")
+                .delete()
         }
     }
 

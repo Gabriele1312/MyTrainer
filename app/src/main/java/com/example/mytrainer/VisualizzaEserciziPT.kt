@@ -32,7 +32,7 @@ class VisualizzaEserciziPT : AppCompatActivity() {
         EventChangeListener()
     }
 
-    //visualizza esercizi (da fare: per quell utente)
+    //visualizza esercizi
     private fun EventChangeListener() {
         val UID:String = intent.getStringExtra("uidAtleti").toString()
         db = FirebaseFirestore.getInstance()
