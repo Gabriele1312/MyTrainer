@@ -16,6 +16,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
@@ -25,6 +27,7 @@ import kotlin.toString as toString1
 
 class LoginActivityPT : AppCompatActivity(){
 
+    private lateinit var userArrayList: ArrayList<Atleti>
     lateinit var callbackManager: CallbackManager
     lateinit var mAuth: FirebaseAuth
     private val TAG = "FacebookAuthentication"
@@ -76,7 +79,7 @@ class LoginActivityPT : AppCompatActivity(){
     private fun updateUIT() {
         Toast.makeText(this, " Accesso già effettuato ", Toast.LENGTH_SHORT).show()
 
-        //apre Dashboard
+        //apre TrainerActivity
         val dashboard = Intent(this, TrainerActivity::class.java)
         startActivity(dashboard)
     }
@@ -146,14 +149,68 @@ class LoginActivityPT : AppCompatActivity(){
     }
 
     private fun updateUI(currentUser: FirebaseUser?) {
-        Log.d(TAG, "Dentro")
-        Toast.makeText(this, " Login effettuato ", Toast.LENGTH_SHORT).show()
+//        Log.d(TAG, "Dentro")
+//        Toast.makeText(this, " Login effettuato ", Toast.LENGTH_SHORT).show()
+//
+//        //apre Dashboard
+//        val dashboard = Intent(this, TrainerActivity::class.java).also {
+//            startActivity(it)
+//
+//        }
 
-        //apre Dashboard
-        val dashboard = Intent(this, TrainerActivity::class.java).also {
-            startActivity(it)
+        userArrayList = arrayListOf()
+        var note: String = ""
 
+        var idUtente = mAuth.currentUser?.uid?.toString1()
+
+        val db = FirebaseFirestore.getInstance()
+        val dataB = db.collection("Atleti")
+
+        val query = dataB
+            .whereEqualTo("UIDatleti", mAuth.currentUser?.uid)
+
+        query.get().addOnSuccessListener { querySnapshot ->
+
+            for (dc : DocumentChange in querySnapshot.documentChanges){
+                note = dc.document.getString("UIDatleti").toString1()
+                Log.d(TAG, "*************PROVAAAAAA ${note}")
+            }
+            if (mAuth.currentUser?.uid != note) {
+
+                val utenti = hashMapOf(
+                    "nome" to mAuth.currentUser?.displayName,
+                    "UIDatleti" to (mAuth.uid.toString1())
+                )
+
+                db.collection("Atleti").document(mAuth.currentUser?.uid.toString1())
+                    .set(utenti)
+                    .addOnSuccessListener {
+                        Log.d(
+                            TAG,
+                            "DocumentSnapshot successfully written!"
+                        )
+                    }
+                    .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+
+                Log.d(TAG, "Dentro con registrazione utente")
+                Toast.makeText(this, " Login effettuato ", Toast.LENGTH_SHORT).show()
+
+                //apre TrainerActivity
+                Intent(this, TrainerActivity::class.java).also {
+                    startActivity(it)
+                    it.putExtra("uidAtleti", mAuth.currentUser?.uid.toString1())
+                }
+            }else{
+                Log.d(TAG, "Dentro senza registrazione utente")
+                Toast.makeText(this, " Login effettuato ", Toast.LENGTH_SHORT).show()
+                //apre TrainerActivity
+                Intent(this, TrainerActivity::class.java).also {
+                    startActivity(it)
+                    intent.putExtra("uidAtleti", mAuth.currentUser?.uid.toString1())
+                }
+            }
         }
+        Log.d(TAG, "updateUI: *****************${note}")
     }
 }
 
