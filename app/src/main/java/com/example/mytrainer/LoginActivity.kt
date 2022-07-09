@@ -21,6 +21,7 @@ import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
 import com.example.mytrainer.DashboardActivity as DashboardActivity1
@@ -34,6 +35,7 @@ class LoginActivity : AppCompatActivity(){
     private val TAG = "FacebookAuthentication"
     lateinit var facebookBtn: Button
     private lateinit var database: DatabaseReference
+    lateinit var ID: String
 
 
     //quando l'activity si inizializza, controlla se l'utente è già loggato
@@ -71,6 +73,8 @@ class LoginActivity : AppCompatActivity(){
             override fun onSuccess(loginResult: LoginResult) {
                 Log.d(TAG, "facebook:onSuccess:$loginResult")
                 handleFacebookAccessToken(loginResult.accessToken)
+                ID = loginResult.accessToken.userId
+                Log.d(TAG, "************************* USERID:::: ${loginResult.accessToken}")
             }
 
             override fun onCancel() {
@@ -145,7 +149,8 @@ class LoginActivity : AppCompatActivity(){
 
                 val utenti = hashMapOf(
                     "nome" to mAuth.currentUser?.displayName,
-                    "UIDatleti" to (mAuth.uid.toString1())
+                    "UIDatleti" to (mAuth.uid.toString1()),
+                    "IDfoto" to ID.toString()
                 )
 
                 db.collection("Atleti").document(mAuth.currentUser?.uid.toString1())

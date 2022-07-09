@@ -33,7 +33,7 @@ class LoginActivityPT : AppCompatActivity(){
     private val TAG = "FacebookAuthentication"
     lateinit var facebookBtn: Button
     private lateinit var database: DatabaseReference
-
+    lateinit var ID: String
 
     //quando l'activity si inizializza, controlla se l'utente è già loggato
     override fun onStart() {
@@ -45,34 +45,6 @@ class LoginActivityPT : AppCompatActivity(){
         if(accessToken != null && !accessToken.isExpired){
             updateUIT()
         }
-
-//        val utenti = hashMapOf(
-//            "UIDatleti" to (mAuth.uid.toString1())
-//        )
-//        val db = Firebase.firestore
-//        db.collection("Utenti").document("Atleti")
-//            .set(utenti)
-//            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
-//            .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
-//
-//        val usrAtleti = db.collection("Utenti")
-//
-//
-//        val query = usrAtleti.orderBy("UIDatleti").equals("UID")
-//            .get()
-//            .addOnSuccessListener { documents ->
-//                for (document in documents) {
-//                    Log.d(TAG, "${document.id} => ${document.data}")
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.w(TAG, "Error getting documents: ", exception)
-//            }
-//        if (query.toString() == UID){
-//            Log.d(TAG, "**************** GGGGGGGG")
-//        }else{
-//            Log.d(TAG, "***************** NOOOOOOOOOOOOOOOO ${query}")
-//        }
 
     }
 
@@ -97,6 +69,7 @@ class LoginActivityPT : AppCompatActivity(){
             override fun onSuccess(loginResult: LoginResult) {
                 Log.d(TAG, "facebook:onSuccess:$loginResult")
                 handleFacebookAccessToken(loginResult.accessToken)
+                ID = loginResult.accessToken.userId
             }
 
             override fun onCancel() {
@@ -179,7 +152,8 @@ class LoginActivityPT : AppCompatActivity(){
 
                 val utenti = hashMapOf(
                     "nome" to mAuth.currentUser?.displayName,
-                    "UIDatleti" to (mAuth.uid.toString1())
+                    "UIDatleti" to (mAuth.uid.toString1()),
+                    "IDfoto" to ID.toString()
                 )
 
                 db.collection("Atleti").document(mAuth.currentUser?.uid.toString1())

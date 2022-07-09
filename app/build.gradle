@@ -52,5 +52,9 @@ dependencies {
     //implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     //implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
     implementation 'com.facebook.android:facebook-android-sdk:latest.release'
+    //Picasso
+    def picassoVersion = "2.71828"
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
+
 
 }

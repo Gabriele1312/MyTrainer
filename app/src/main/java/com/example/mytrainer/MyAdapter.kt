@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 
 class MyAdapter(private val userList: ArrayList<Atleti>): RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
@@ -22,6 +24,7 @@ class MyAdapter(private val userList: ArrayList<Atleti>): RecyclerView.Adapter<M
         val user: Atleti = userList[position]
         holder.UID.text = user.UIDatleti
         holder.nome.text = user.nome
+        holder.IDfoto.text = user.IDfoto
         //immagine
     }
 
@@ -34,8 +37,11 @@ class MyAdapter(private val userList: ArrayList<Atleti>): RecyclerView.Adapter<M
 
         val UID: TextView = itemView.findViewById(R.id.tvUID)
         val nome: TextView = itemView.findViewById(R.id.tvnome)
-        //immagine
+        val IDfoto: TextView = itemView.findViewById(R.id.tvIDFoto)
+        val foto: ImageView = itemView.findViewById(R.id.iv_profilo)
 
+        var fotoProfilo: String = "http://graph.facebook.com/" + IDfoto.text +"/picture?type=large"
+        val picasso = Picasso.get().load(fotoProfilo).into(foto)
 
         val btnAggiungiScheda = itemView.findViewById<Button>(R.id.btn_aggiungiScheda).setOnClickListener(View.OnClickListener {
             Log.i("PersonalTrainer" ,"APRO INSERISCI ESERCIZIO")
