@@ -22,7 +22,7 @@ class TrainerActivity : AppCompatActivity() {
 
        logout = findViewById(R.id.im_logout)
 
-        logout?.setOnClickListener{
+        logout.setOnClickListener{
 
             mAuth?.signOut()
             LoginManager.getInstance().logOut()

@@ -29,15 +29,12 @@ class DashboardActivity : AppCompatActivity() {
         im_timer = findViewById(R.id.im_timer)
         im_exit = findViewById(R.id.im_exit)
 
-       // var btnLogout = findViewById<Button>(R.id.btn_logout)
-
         im_exit.setOnClickListener{
 
             mAuth?.signOut()
             LoginManager.getInstance().logOut()
             Toast.makeText(this, " LogOut ", Toast.LENGTH_SHORT).show()
 
-//            updateUI()
         }
 
 
@@ -56,21 +53,11 @@ class DashboardActivity : AppCompatActivity() {
 
 
         im_timer.setOnClickListener(){
-            val timer = Intent(this@DashboardActivity, Timer::class.java)
-            startActivity(timer)
+            val timerHome = Intent(this@DashboardActivity, TimerHome::class.java)
+            startActivity(timerHome)
         }
 
     }
-
-
-//    override fun onStart() {
-//        super.onStart()
-//        val currentUser = mAuth?.currentUser
-//
-//        if(currentUser != null){
-//            updateUI()
-//        }
-//    }
 
     private fun updateUI() {
         Toast.makeText(this, " LogOut ", Toast.LENGTH_SHORT).show()

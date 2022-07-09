@@ -137,7 +137,7 @@ class LoginActivityPT : AppCompatActivity(){
         var idUtente = mAuth.currentUser?.uid?.toString1()
 
         val db = FirebaseFirestore.getInstance()
-        val dataB = db.collection("Atleti")
+        val dataB = db.collection("Personal Trainer")
 
         val query = dataB
             .whereEqualTo("UIDatleti", mAuth.currentUser?.uid)
@@ -156,7 +156,7 @@ class LoginActivityPT : AppCompatActivity(){
                     "IDfoto" to ID.toString()
                 )
 
-                db.collection("Atleti").document(mAuth.currentUser?.uid.toString1())
+                db.collection("Personal Trainer").document(mAuth.currentUser?.uid.toString1())
                     .set(utenti)
                     .addOnSuccessListener {
                         Log.d(

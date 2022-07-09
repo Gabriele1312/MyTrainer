@@ -29,8 +29,6 @@ class AthleteActivity : AppCompatActivity() {
     private lateinit var myAdapter: MyAdapterEsercizi
     private lateinit var db: FirebaseFirestore
     private lateinit var buttonTimer: Button
-//    val UID:String = intent.getStringExtra("uidAtleti").toString()
-//    val UID:String = mAuth?.currentUser?.uid.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

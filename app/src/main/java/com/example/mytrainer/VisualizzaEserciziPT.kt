@@ -11,14 +11,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.lista_atleti_item.*
 
-//lateinit var facebookID: ArrayList<fbID>
 class VisualizzaEserciziPT : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var eserciziArrayList: ArrayList<Esercizi>
     private lateinit var myAdapter: MyAdapterSchedaPT
     private lateinit var db: FirebaseFirestore
-//    lateinit var facebookID: ArrayList<fbID>
 
     companion object{
         lateinit var facebookID: String
@@ -44,7 +42,6 @@ class VisualizzaEserciziPT : AppCompatActivity() {
     //visualizza esercizi
     private fun EventChangeListener() {
         val UID:String = intent.getStringExtra("uidAtleti").toString()
-        facebookID = UID
         db = FirebaseFirestore.getInstance()
         db.collection("Esercizi/Atleti/${UID}")
 

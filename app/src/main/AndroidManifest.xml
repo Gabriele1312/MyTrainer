@@ -12,14 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTrainer">
         <activity
+            android:name=".TimerHome"
+            android:exported="false" />
+        <activity
             android:name=".VisualizzaEserciziPT"
             android:exported="false" />
         <activity
             android:name=".AggiuntaEsercizi"
             android:exported="false" />
-        <activity
-            android:name=".CardView"
-            android:exported="true" />
+<!--        <activity-->
+<!--            android:name=".CardView"-->
+<!--            android:exported="true" />-->
         <activity
             android:name=".LoginActivityPT"
             android:exported="false" />

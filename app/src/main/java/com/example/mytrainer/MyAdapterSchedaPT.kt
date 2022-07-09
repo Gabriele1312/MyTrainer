@@ -45,63 +45,6 @@ class MyAdapterSchedaPT(private val eserciziList: ArrayList<Esercizi>): Recycler
         val nome: TextView = itemView.findViewById(R.id.tvnome)
         val serie: TextView = itemView.findViewById(R.id.tvserie)
         val ripetizioni: TextView = itemView.findViewById(R.id.tvripetizioni)
-
-        //elimina esercizio scheda
-        val btnElimina = itemView.findViewById<Button>(R.id.btn_eliminaEsercizio).setOnClickListener(View.OnClickListener{ it: View ->
-
-            val context = it.context //recupera context dove lavora adapter
-            val TAG: String = "TAG"
-            //creazione alert Dialog prima di eliminare
-            AlertDialog.Builder(context)
-            .setTitle("Sei Sicuro?")
-            .setMessage("I dati non potranno essere recuperati")
-
-            .setPositiveButton("Elimina"){dialog, which ->
-                Log.i("PERSONAL TRAINER" , "Elimino esercizio")
-                Toast.makeText(context, " Esercizio eliminato ", Toast.LENGTH_SHORT).show()
-                var UID = VisualizzaEserciziPT.facebookID
-                Log.d(TAG, "***************** Ecco l'UID per cancellare l'esercizio: ${UID}")
-                var nomeEs = nome.text.toString()
-                Log.d(TAG, "***************** Ecco il nome dell'esercizio: ${nomeEs} ")
-
-                val db = FirebaseFirestore.getInstance()
-                val dataB = db.collection("Esercizi")
-                    .document("Atleti/${UID}")
-//                    .id
-//                    .toString()
-                Log.d(TAG, "******************* DATABBB${dataB} ")
-
-//                val updates = hashMapOf<String, Any>(
-//                    "nome" to FieldValue.delete()
-//                )
-//                dataB.update(updates).addOnCompleteListener{}
-
-            }
-
-            .setNegativeButton("Indietro") {dialog, which ->
-                Toast.makeText(context, "Ripristino", Toast.LENGTH_SHORT).show()
-            }
-
-                .show() //mostra alert dialog
-
-        })
-
-        //FUNZIONE ELIMINA ESERCIZIO DA IMPLEMENTARE
-//        private fun eliminaEsercizio(view: View) {
-//            var UID = facebookID.get(0)
-//            Log.d("TAG", "******************** Ecco l'UID:  ${UID}: ")
-//            lateinit var mAuth: FirebaseAuth
-//
-//            val db = FirebaseFirestore.getInstance()
-//            val dataB = db.collection("Esercizi/Atleti/${UID}")
-//                .whereEqualTo("nome", mAuth)
-//
-//
-//            val updates = hashMapOf<String, Any>(
-//                "nome" to FieldValue.delete()
-//            )
-//            dataB.update(updates).addOnCompleteListener{}
-//        }
     }
 
 }

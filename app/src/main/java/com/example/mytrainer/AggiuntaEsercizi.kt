@@ -20,9 +20,9 @@ class AggiuntaEsercizi : AppCompatActivity() {
         setContentView(R.layout.activity_aggiunta_esercizi)
 
         val btnAdd = findViewById<Button>(R.id.btnAggiungiEsercizio)
-        val nomeEsercizio = findViewById<EditText>(R.id.nomeEsercizio)
-        val reps = findViewById<EditText>(R.id.repsEsercizio)
-        val serie = findViewById<EditText>(R.id.serieEsercizio)
+        val nomeEsercizioet = findViewById<EditText>(R.id.nomeEsercizio)
+        val repset = findViewById<EditText>(R.id.repsEsercizio)
+        val serieet = findViewById<EditText>(R.id.serieEsercizio)
         val UID:String = intent.getStringExtra("uidAtleti").toString()
         val nomeAtleta:String = intent.getStringExtra("nomeAtleta").toString()
 
@@ -30,9 +30,9 @@ class AggiuntaEsercizi : AppCompatActivity() {
 
         btnAdd.setOnClickListener(){
 
-            val nomeEsercizio = nomeEsercizio.text.toString()
-            val reps = reps.text.toString().toInt()
-            val serie = serie.text.toString().toInt()
+            val nomeEsercizio = nomeEsercizioet.text.toString()
+            val reps = repset.text.toString().toInt()
+            val serie = serieet.text.toString().toInt()
 
             val esercizio = hashMapOf(
                 "nome" to nomeEsercizio ,
@@ -46,6 +46,9 @@ class AggiuntaEsercizi : AppCompatActivity() {
                 .addOnSuccessListener {
                     Log.d("ADD DATA", "DocumentSnapshot successfully written! *********** ${nomeAtleta}")
                     Toast.makeText(this, " Esercizio Aggiunto ", Toast.LENGTH_SHORT).show()
+                    nomeEsercizioet.text.clear()
+                    repset.text.clear()
+                    serieet.text.clear()
                 }
 
                 .addOnFailureListener { e -> Log.w("ADD DATA", "Error writing document", e) }
